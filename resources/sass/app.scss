@@ -1,0 +1,86 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+html {
+	width: 100%;
+	height: 100%;
+	body {
+		width: 100%;
+		height: 100%;
+		.buffer {
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		.bg-peru {
+			background: #c09935;
+			color: #fff !important;
+		}
+		.bg-burlywood {
+			background: #e3cd81;
+			color: #fff !important;
+		}
+		.bg-gray {
+			background: #ccc;
+			color: #fff !important;
+        }
+        
+        .modal{
+            .modal-header{
+                background: #c09935;
+                color: #fff;
+            }
+		}
+		.table-striped tbody tr:nth-of-type(odd){
+			background: #606061 !important;
+			color: #fff;
+		}
+		.aside {
+			width: 250px;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+			background: #c09935;
+			.header {
+				border-bottom: 1px solid #625e59;
+				h1 {
+					color: #625e59;
+					font-weight: lighter;
+					span {
+						color: #fff;
+					}
+				}
+			}
+			.menu {
+				padding: 0;
+				li {
+					border-bottom: 1px solid #625e59;
+					a {
+						color: #fff;
+						padding: 10px 15px;
+						display: block;
+					}
+				}
+			}
+		}
+		.content {
+			width: calc(100% - 250px);
+			min-height: 100%;
+			height: auto;
+			float: right;
+			background: #f5f5f5;
+			.navbar {
+				background: #e3cd81 !important;
+			}
+			.title {
+				color: #5f5f5f;
+			}
+		}
+	}
+}

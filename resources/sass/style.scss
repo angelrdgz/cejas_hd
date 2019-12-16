@@ -1,0 +1,20 @@
+//
+@import "~bootstrap/scss/bootstrap.scss";
+
+html{
+    width: 100%;
+    height: 100%;
+    body{
+        width:100%;
+        height: 100%;
+        background: #231f20;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .title{
+            font-size: 4em;
+            color: #c39b3b;
+        }
+    }
+}
