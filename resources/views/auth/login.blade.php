@@ -4,7 +4,7 @@
 <div class="container ">
     <div class="row justify-content-center d-flex justify-content-center">
         <div class="col-md-4">
-            <h1 class="text-center title">CEJAS HD</h1>
+            <img style="width: 70%; display: block; margin: 20px auto 40px;" src="{{ asset('images/logo.png') }}" alt="">
             <div class="card">
                 <div class="card-body">
                     <img src="{{ asset('/images/profile.jpg') }}" class="rounded-circle mx-auto d-block" alt="">

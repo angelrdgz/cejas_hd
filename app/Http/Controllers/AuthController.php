@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Validator;
 
 use Auth;
+use Mail;
 
 class AuthController extends Controller
 {
@@ -41,5 +42,13 @@ class AuthController extends Controller
     public function logout(Request $request){
         Auth::logout();
         return redirect('/');
+    }
+
+    public function  email()
+    {
+        Mail::send('emails.engagement',[], function($message){
+            $message->from('abc@gmail.com');
+            $message->to('test@cloudways.com', 'Admin')->subject('Cloudways Feedback');
+        });        
     }
 }

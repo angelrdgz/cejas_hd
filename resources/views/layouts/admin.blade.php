@@ -18,7 +18,7 @@
 <body>
     <div class="aside">
         <div class="header">
-            <h1 class="text-center">CEJAS <span>HD</span></h1>
+            <img style="width: 70%; display: block; margin: 10px auto;" src="{{ asset('images/logo.png') }}" alt="">
         </div>
         <ul class="menu">
             <li>
