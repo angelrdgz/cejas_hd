@@ -11,6 +11,8 @@ use App\User;
 use App\Client;
 use Auth;
 
+use Mail;
+
 class EngagementController extends Controller
 {
     public function index()
@@ -55,7 +57,6 @@ class EngagementController extends Controller
         $engagement = new Engagement();
         $engagement->service_id = $request->service;
         $engagement->client_id = $request->client;
-        $engagement->phone = $request->phone;
         $engagement->adviser_id = 1;
         $engagement->branch_id = $request->branch;
         $engagement->user_id = Auth::user()->id;
@@ -63,6 +64,15 @@ class EngagementController extends Controller
         $engagement->reservation = $request->reservation;
         $engagement->notes = $request->notes;
         $engagement->save();
+
+        $days = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
+        Mail::send('emails.engagement',[
+            'engagement'=>$engagement,
+            'days'=>$days,
+        ], function($message) use($engagement) {
+            $message->from('contacto@cejashd.com');
+            $message->to($engagement->client->email, 'Cita - Cejas HD')->subject('Confirmación de Cita');
+        });
 
         return redirect('admin/citas');
     }

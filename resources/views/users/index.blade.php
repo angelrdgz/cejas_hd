@@ -27,7 +27,7 @@
             <td>{{$user->id}}</td>
             <td>{{$user->name}}</td>
             <td>{{$user->email}}</td>
-            <td>{{ucfirst($roles[$user->id])}}</td>
+            <td>{{ucfirst($roles[$user->role_id])}}</td>
             <td>
                 <i class="icon ion-md-create btnEdit" data-id="{{$user->id}}"></i>
             </td>

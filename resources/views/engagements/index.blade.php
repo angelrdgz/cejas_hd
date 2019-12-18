@@ -96,7 +96,7 @@
                     <div class="form-group row">
                         <label for="staticEmail" class="col-sm-2 col-form-label">Sucursal</label>
                         <div class="col-sm-10">
-                            <select name="branch" class="form-control" id="">
+                            <select name="branch" class="form-control selectpicker" id="">
                                 <option value="" disabled>Seleccionar sucursal</option>
                                 @foreach($branches as $branch)
                                    <option value="{{$branch->id}}">{{$branch->name}}</option>
@@ -110,7 +110,7 @@
                     <div class="form-group row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Cliente</label>
                         <div class="col-sm-10">
-                        <select name="client" class="form-control" id="">
+                        <select name="client" class="form-control selectpicker" data-live-search="true">
                                 <option value="" disabled>Seleccionar cliente</option>
                                 @foreach($clients as $client)
                                    <option value="{{$client->id}}">{{$client->name}}</option>
@@ -119,15 +119,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Contacto</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="phone" class="form-control" id="inputPassword">
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Asesor</label>
                         <div class="col-sm-10">
-                        <select name="adviser" class="form-control" id="">
+                        <select name="adviser" class="form-control selectpicker" id="">
                                 <option value="" disabled>Seleccionar Asesor</option>
                                 @foreach($advisors as $advisor)
                                    <option value="{{$advisor->id}}">{{$advisor->name}}</option>
@@ -138,7 +132,7 @@
                     <div class="form-group row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Servicio</label>
                         <div class="col-sm-10">
-                        <select name="service" class="form-control" id="">
+                        <select name="service" class="form-control selectpicker" id="">
                                 <option value="" disabled>Seleccionar sucursal</option>
                                 @foreach($services as $service)
                                    <option value="{{$service->id}}">{{$service->name}}</option>
@@ -147,9 +141,17 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Fecha y Hora</label>
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Fecha</label>
                         <div class="col-sm-10">
                             <input type="datetime-local" name="reservation" class="form-control" id="inputPassword">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Hora</label>
+                        <div class="col-sm-10">
+                            <select name="" id="" class="form-control">
+
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">

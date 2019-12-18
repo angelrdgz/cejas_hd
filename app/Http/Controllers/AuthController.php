@@ -8,6 +8,7 @@ use Validator;
 
 use Auth;
 use Mail;
+use App\Engagement;
 
 class AuthController extends Controller
 {
@@ -46,7 +47,12 @@ class AuthController extends Controller
 
     public function  email()
     {
-        Mail::send('emails.engagement',[], function($message){
+        $engagement = Engagement::find(1);        
+        $days = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
+        Mail::send('emails.engagement',[
+            'engagement'=>$engagement,
+            'days'=>$days,
+        ], function($message){
             $message->from('abc@gmail.com');
             $message->to('test@cloudways.com', 'Admin')->subject('Cloudways Feedback');
         });        

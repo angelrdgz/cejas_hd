@@ -15,4 +15,5 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('sucursales', 'BranchController');
     Route::resource('clientes', 'ClientController');
     Route::resource('usuarios', 'UserController');
+    Route::resource('servicios', 'ServiceController');
 });
