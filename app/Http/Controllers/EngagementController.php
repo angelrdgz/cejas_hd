@@ -61,7 +61,7 @@ class EngagementController extends Controller
         $engagement->branch_id = $request->branch;
         $engagement->user_id = Auth::user()->id;
         $engagement->status = 'Pendiente';
-        $engagement->reservation = $request->reservation;
+        $engagement->reservation = $request->reservation.' '.$request->hour;
         $engagement->notes = $request->notes;
         $engagement->save();
 

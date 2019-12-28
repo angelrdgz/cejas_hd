@@ -143,14 +143,20 @@
                     <div class="form-group row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Fecha</label>
                         <div class="col-sm-10">
-                            <input type="datetime-local" name="reservation" class="form-control" id="inputPassword">
+                            <input type="date" name="reservation" class="form-control" id="inputPassword">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Hora</label>
                         <div class="col-sm-10">
-                            <select name="" id="" class="form-control">
-
+                            <select name="hour" id="" class="form-control">
+                               <option value="" disabled>Seleccionar Hora</option>
+                               @php
+                                $range = range(strtotime('10:00'), strtotime('20:00'), 90*60);
+                               @endphp
+                               @foreach($range as $time)
+                                <option value="{{date('H:i:s', $time)}}">{{date('H:i', $time)}} - {{date('H:i', strtotime('+90 minutes', strval($time)))}}</option>
+                               @endforeach
                             </select>
                         </div>
                     </div>

@@ -28,6 +28,11 @@
                 </a>
             </li>
             <li>
+                <a href="{{ url('admin/punto-de-venta') }}">
+                    <i class="icon ion-md-home"></i> Punto de Venta
+                </a>
+            </li>
+            <li>
                 <a href="{{ url('admin/citas') }}">
                     <i class="icon ion-md-home"></i> Mis citas
                 </a>
