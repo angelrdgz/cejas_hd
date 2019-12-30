@@ -6,6 +6,8 @@ Route::post('logout', 'AuthController@logout');
 
 Route::get('email', 'AuthController@email');
 
+Route::get('generate-pdf','AuthController@generatePDF');
+
 
 
 Route::prefix('admin')->middleware(['auth'])->group(function () {
@@ -17,4 +19,6 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('usuarios', 'UserController');
     Route::resource('servicios', 'ServiceController');
     Route::resource('punto-de-venta', 'POSController');
+
+    Route::get('ticket/{id}', 'POSController@ticket');
 });

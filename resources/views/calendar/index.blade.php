@@ -89,6 +89,9 @@
 
         @foreach($engagements as $engagement)
 
+
+        @if($engagement->type == 1)
+
         engagements.push({
             id: '{{$engagement->id}}',
             title: '{{$engagement->service->name}}',
@@ -97,6 +100,18 @@
             color: colors['{{$engagement->status}}'],
             textColor: '#fff'
         });
+        @else
+
+        engagements.push({
+            id: '{{$engagement->id}}',
+            title: 'Horas Bloqueadas',
+            start: '{{$engagement->reservation}}',
+            end: '{{date("Y-m-d H:i:s", strtotime("+".$engagement->duration." minutes", strtotime($engagement->reservation)))}}',
+            color: '#aaaaaa',
+            textColor: '#fff'
+        });
+        @endif
+
         @endforeach
 
         var calendar = new FullCalendar.Calendar(calendarEl, {

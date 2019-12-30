@@ -38,7 +38,7 @@
                     </td>
                     <td colspan="4" class="text-right">
                         <button class="btn btn-secondary" data-toggle="modal" data-target="#newEngagement">Nueva Cita</button>
-                        <button class="btn btn-secondary">Bloquear Horas</button>
+                        <button class="btn btn-secondary" data-toggle="modal" data-target="#blockHours">Bloquear Horas</button>
                         <button class="btn btn-secondary">Cancelar Cita</button>
                     </td>
                 </tr>
@@ -57,7 +57,7 @@
                     <th>Status</th>
                     <th>Fecha</th>
                     <th>Hora</th>
-                    <th>Editar</th>
+                    <th>Cancelar</th>
                 </tr>
             </thead>
             <tbody>
@@ -80,6 +80,76 @@
     </div>
 </div>
 
+<div class="modal fade" id="blockHours" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Bloquear Horas</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <form method="POST" action="{{ url('admin/citas') }}">
+                        @csrf
+                        <input type="hidden" name="type" value="2">
+                        @if(Auth::user()->role_id == 1)
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">Sucursal</label>
+                        <div class="col-sm-10">
+                            <select name="branch" class="form-control selectpicker" id="">
+                                <option value="" disabled>Seleccionar sucursal</option>
+                                @foreach($branches as $branch)
+                                   <option value="{{$branch->id}}">{{$branch->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    @else
+                    <input type="hidden" name="branch" value="{{Auth::user()->branch_id}}">
+                    @endif
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Fecha</label>
+                        <div class="col-sm-10">
+                            <input type="date" name="reservation" class="form-control" id="inputPassword">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Hora de Inicio</label>
+                        <div class="col-sm-10">
+                        <select name="start" class="form-control selectpicker" data-live-search="true">
+                                <option value="" disabled>Seleccionar hora</option>
+                                @for($i = 10; $i <= 19; $i++)
+                                 <option value="{{$i.':00'}}">{{$i.':00'}}</option>
+                                @endfor
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Hora de Termino</label>
+                        <div class="col-sm-10">
+                        <select name="end" class="form-control selectpicker" data-live-search="true">
+                                <option value="" disabled>Seleccionar hora</option>
+                                @for($i = 10; $i <= 19; $i++)
+                                 <option value="{{$i.':00'}}">{{$i.':00'}}</option>
+                                @endfor
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-3 offset-sm-3">
+                        <button type="submit" class="btn btn-primary btn-block">Agendar</button>
+                        </div>
+                        <div class="col-sm-3">
+                           <button class="btn btn-secondary btn-block" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="newEngagement" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -92,6 +162,8 @@
             <div class="modal-body">
             <form method="POST" action="{{ url('admin/citas') }}">
                         @csrf
+                        <input type="hidden" name="type" value="1">
+                        <input type="hidden" name="duration" value="0">
                     @if(Auth::user()->role_id == 1)
                     <div class="form-group row">
                         <label for="staticEmail" class="col-sm-2 col-form-label">Sucursal</label>
@@ -179,4 +251,12 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+ <script>
+  $(document).on('change', 'select[name="service"]', function(){
+      
+  })
+ </script>
 @endsection

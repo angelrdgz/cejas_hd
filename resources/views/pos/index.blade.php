@@ -41,35 +41,34 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Nuevo Servicio</h5>
+                <h5 class="modal-title">Pago de Servicio</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ url('admin/servicios') }}">
+                <form method="POST" action="{{ url('admin/punto-de-venta') }}">
                     @csrf
+                    <input type="hidden" name="id">
                     <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
+                        <label for="staticEmail" class="col-sm-2 col-form-label">Metodo</label>
                         <div class="col-sm-10">
-                            <input type="text" name="name" class="form-control" id="inputPassword">
+                            <select name="method" id="" class="form-control">
+                             <option value="Efectivo">Efectivo</option>
+                             <option value="Tarjeta">Tarjeta</option>
+                             <option value="Pago OXXO">Pago OXXO</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">Precio</label>
+                        <label for="staticEmail" class="col-sm-2 col-form-label">Paga Con</label>
                         <div class="col-sm-10">
-                            <input type="text" name="price" class="form-control" id="inputPassword">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">Duración (En minutos)</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="minutes" class="form-control" id="inputPassword">
+                            <input type="text" class="form-control number" name="pay">
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-3 offset-sm-3">
-                            <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                            <button type="submit" class="btn btn-primary btn-block btnPay">Pagar</button>
                         </div>
                         <div class="col-sm-3">
                             <button class="btn btn-secondary btn-block" data-dismiss="modal">Cancelar</button>
@@ -131,14 +130,25 @@
 
 @section('script')
 <script>
+
+    $('.btnPay').click(function(){
+        setTimeout(() => {
+
+            window.reload();
+            
+        }, 300);
+    })
+    
     $('.btnEdit').click(function() {
         let id = $(this).data('id')
+        $('input[name="id"]').val(id)
+        $('#newService').modal();
         /*$.ajax({
             url: '{{ url("admin/sucursal") }}/'ìd,
             method: 'GET',
             success:
         })*/
-        const branch = fetch('{{ url("admin/servicios") }}/'+id)
+        /*const branch = fetch('{{ url("admin/servicios") }}/'+id)
             .then(function(response) {
                 return response.json();
             })
@@ -149,7 +159,7 @@
                 $('.editMinutes').val(response.data.minutes)
                 $('#editService').find('form').attr('action', '{{ url("admin/servicios") }}/'+id);
                 $('#editService').modal();
-            });
+            });*/
     })
 </script>
 @endsection

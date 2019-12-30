@@ -7,7 +7,7 @@
             <div class="card-body">
                 <br>
                 <br>
-                <h1 class="text-center">$0.00</h1>
+                <h1 class="text-center">${{$money}}</h1>
                 <br>
                 <br>
             </div>
@@ -33,11 +33,16 @@
     <div class="col-sm-3">
         <div class="card">
             <div class="card-body">
-                <h2 class="text-center">Cliente #3</h2>
-                <h2 class="text-center">Contacto</h2>
-                <h2 class="text-center">Cejas HD</h2>
-                <h2 class="text-center">04:30 PM</h2>
+               @if($next == NULL)
+               <h2>No hay cita</h2>
+               <h2>Registrada</h2>
+               @else
+                <h2 class="text-center">Cliente #{{$next->client_id}}</h2>
+                <h2 class="text-center">{{$next->client->name}}</h2>
+                <h2 class="text-center">{{$next->service->name}}</h2>
+                <h2 class="text-center">{{date('h:m A', strtotime($next->reservation))}}</h2>
                 <p class="text-center" style="margin-bottom:0;">Proxima Cita</p>
+                @endif
             </div>
         </div>
     </div>
@@ -69,7 +74,7 @@
                         <span class="badge badge-success">{{$engagement->status}}</span>
                     </td>
                     <td>
-                        Pendiente
+                        {{$engagement->payment_method == NULL ? 'Pendiente': $engagement->payment_method}}
                     </td>
                 </tr>
                 @endforeach

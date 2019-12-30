@@ -55,25 +55,50 @@ class EngagementController extends Controller
     {
 
         $engagement = new Engagement();
-        $engagement->service_id = $request->service;
+
+
+        switch ($request->type) {
+            case '1':
+                $engagement->service_id = $request->service;
         $engagement->client_id = $request->client;
         $engagement->adviser_id = 1;
+        $engagement->type = 1;
         $engagement->branch_id = $request->branch;
         $engagement->user_id = Auth::user()->id;
         $engagement->status = 'Pendiente';
         $engagement->reservation = $request->reservation.' '.$request->hour;
+        $engagement->duration = '90';//$request->duration;
         $engagement->notes = $request->notes;
         $engagement->save();
 
         $days = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
-        Mail::send('emails.engagement',[
-            'engagement'=>$engagement,
-            'days'=>$days,
-        ], function($message) use($engagement) {
-            $message->from('contacto@cejashd.com');
-            $message->to($engagement->client->email, 'Cita - Cejas HD')->subject('Confirmación de Cita');
-        });
-
+        try {
+            Mail::send('emails.engagement',[
+                'engagement'=>$engagement,
+                'days'=>$days,
+            ], function($message) use($engagement) {
+                $message->from('contacto@cejashd.com');
+                $message->to($engagement->client->email, 'Cita - Cejas HD')->subject('Confirmación de Cita');
+            });
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+                break;
+                case '2':
+                    $engagement->branch_id = $request->branch;
+                    $engagement->user_id = Auth::user()->id;
+                    $engagement->status = '';
+                    $engagement->type = 2;
+                    $engagement->reservation = $request->reservation.' '.$request->start;
+                    $engagement->duration = '120';
+                    $engagement->notes = $request->notes;
+                    $engagement->save();
+                break;
+            
+            default:
+                # code...
+                break;
+        }
         return redirect('admin/citas');
     }
 
@@ -105,5 +130,19 @@ class EngagementController extends Controller
         $engagement->save();
 
         return redirect()->back();
+    }
+
+    public function destroy($id)
+    {
+        $engagement = Engagement::find($id);
+        $engagement->status = 'Cancelada';
+        $engagement->save();
+
+        return redirect()->back()->with('message-success', 'Cita cancelada correctamente'); 
+    }
+
+    private function calcMinutes($start, $end)
+    {
+
     }
 }

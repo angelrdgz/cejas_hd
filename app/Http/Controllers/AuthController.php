@@ -9,6 +9,7 @@ use Validator;
 use Auth;
 use Mail;
 use App\Engagement;
+use PDF;
 
 class AuthController extends Controller
 {
